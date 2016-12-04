@@ -56,6 +56,9 @@ BLYNK_WRITE(1)
   //digitalWrite(redPin,LOW);
   mode = 1 ; 
  } else {
+  digitalWrite(greenPin,LOW);
+  digitalWrite(bluePin,LOW);
+  digitalWrite(redPin,LOW);
   mode = 0 ; 
  } 
 }
@@ -107,14 +110,10 @@ void loop()
   {
     digitalWrite(relePin,LOW);
   }
-  switch( mode ) {
-  case 1:
-  rainbow();
-  break;
-  case 0:
-  digitalWrite(greenPin,LOW);
-  digitalWrite(bluePin,LOW);
-  digitalWrite(redPin,LOW);
-  break;
-  }
+  //switch( mode ) {
+  //case 1:
+  //rainbow();
+  //break;
+  //}
+	if mode{rainbow();}
 }
