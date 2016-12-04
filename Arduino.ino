@@ -60,43 +60,32 @@ BLYNK_WRITE(1)
  } 
 }
 
-void buttonCheck()
-
-
-void colorChange() 
+void colorChange(int Pin, int start, int stop, int step)
 {
-  int r, g, b;
-   
-  // fade от голубого к фиолетовому
-  for (r = 0; r < 256; r++) { 
-    analogWrite(redPin, r);
-    delay(FADESPEED);
-  } 
-  // fade от фиолетового к красному
-  for (b = 255; b > 0; b--) { 
-    analogWrite(bluePin, b);
-    delay(FADESPEED);
-  } 
-  // fade от красного к желтому
-  for (g = 0; g < 256; g++) { 
-    analogWrite(greenPin, g);
-    delay(FADESPEED);
-  } 
-  // fade от желтого к зеленому
-  for (r = 255; r > 0; r--) { 
-    analogWrite(redPin, r);
-    delay(FADESPEED);
-  } 
-  // fade от зеленого к зеленовато-голубому
-  for (b = 0; b < 256; b++) { 
-    analogWrite(bluePin, b);
-    delay(FADESPEED);
-  } 
-  // fade от зеленовато-голубого к голубому
-  for (g = 255; g > 0; g--) { 
-    analogWrite(greenPin, g);
-    delay(FADESPEED);
-  } 
+		if !mode{return 0;}
+		int i;
+		if (step>0){
+			for (i = start; i < stop; i = i+step){
+			if !mode{return 0;}
+				analogWrite(Pin, i);
+				delay(FADESPEED);
+			} 
+		else if(step<0){
+			for (i = start; i > stop; i = i+step){ 
+			if !mode{return 0;}
+				analogWrite(Pin, i);
+				delay(FADESPEED);
+			}	
+		}
+}
+
+void rainbow (){
+	colorChange(redPin, 0, 256, 1);
+	colorChange(bluePin, 255, 0, -1);
+	colorChange(greenPin, 0, 256, 1);
+	colorChange(redPin, 255, 0, -1);
+	colorChange(bluePin, 0, 256, 1);
+	colorChange(greenPin, 255, 0, -1);
 }
 
 void leeTEMP()
