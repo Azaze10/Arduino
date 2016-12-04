@@ -63,23 +63,23 @@ BLYNK_WRITE(1)
  } 
 }
 
-void colorChange(int Pin, int start, int stop, int step)
+void colorChange(int myPin, int start, int stop, int step)
 {
+	if !mode{return 0;}
+	int i;
+	if (step>0){
+		for (i = start; i < stop; i = i+step){
 		if !mode{return 0;}
-		int i;
-		if (step>0){
-			for (i = start; i < stop; i = i+step){
-			  if !mode{return 0;}
-				analogWrite(Pin, i);
-				delay(FADESPEED);
-			} 
-		else if(step<0){
-			for (i = start; i > stop; i = i+step){ 
-			  if !mode{return 0;}
-				analogWrite(Pin, i);
-				delay(FADESPEED);
-			}	
-		}
+			analogWrite(myPin, i);
+			delay(FADESPEED);
+		} 
+	else if(step<0){
+		for (i = start; i > stop; i = i+step){ 
+		if !mode{return 0;}
+			analogWrite(myPin, i);
+			delay(FADESPEED);
+		}	
+	}
 }
 
 void rainbow (){
